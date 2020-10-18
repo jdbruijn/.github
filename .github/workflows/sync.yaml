@@ -2,6 +2,9 @@ name: Sync
 on:
   schedule:
   - cron: '0 0 * * *'
+  push:
+    branches:
+      - main
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -9,6 +12,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.3
+        with:
+          fetch-depth: 0
       - name: Sync with vidavidorra/.github
         run: |
           git remote add upstream https://github.com/vidavidorra/.github.git
